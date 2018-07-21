@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Class hierarhy</title>
+  <script>
+
+    const instanceDeveloper = [];
+    const instanceManager = [];
+    let obj = {};
+
+    class Human {
+
+      constructor({name, age, dateOfBirth}) {
+
+        this.name = name;
+        this.age = age;
+        this.dateOfBirth = dateOfBirth;
+      }
+
+      displayInfo() {
+
+        return `Имя: ${this.name}, Возраст: ${this.age}, Дата рождения: ${this.dateOfBirth},`;
+      }
+
+
+    }
+
+    class Employee extends Human {
+
+      constructor({salary = 0 , department = '', ...classProps}) {
+        super({...classProps});
+
+        this.salary = salary;
+        this.department = department
+      }
+
+      displayInfo() {
+        let humanInfo = super.displayInfo();
+
+        return `${humanInfo} Оклад: ${this.salary}, Отдел: ${this.department}`;
+      }
+    }
+
+    class Developer extends Employee {
+
+      constructor({myManager = {}, ...classProps}) {
+        super({...classProps});
+
+        this.myManager = myManager;
+        instanceDeveloper.push(this);
+      }
+
+      getMyManager() {
+
+        return this.myManager.name;
+      }
+
+      replaceManager(manager) {
+
+        if (manager) this.myManager = manager;
+      }
+
+    }
+
+    class Manager extends Employee {
+
+      constructor({developers = [], ...classProps}) {
+        super({...classProps});
+
+        this.myDevelopers = developers;
+
+        instanceManager.push(this);
+      }
+
+      setDeveloper(developer) {
+
+        developer && this.myDevelopers.push(developer);
+      }
+
+      getDevelopers() {
+
+        return this.myDevelopers
+      }
+
+      addDeveloper(name) {
+
+        let resSearch = this.searchDeveloper(name),
+            lengthArr = this.myDevelopers.length;
+
+        if (resSearch === null) {
+
+          this.myDevelopers.push(name);
+          this.myDevelopers.length > lengthArr && console.log('Успешно добавлено');
+        } else {
+
+          console.log('Уже есть');
+        }
+      }
+
+      deleteDeveloper(name) {
+
+        let resSearch = this.searchDeveloper(name),
+            lengthArr = this.myDevelopers.length;
+
+        if (resSearch !== null) {
+
+          this.myDevelopers.splice(resSearch.index, 1);
+          this.myDevelopers.length < lengthArr && console.log('Успешно удалено');
+        } else {
+
+          console.log('Таких нету');
+        }
+      }
+
+      searchDeveloper(name) {
+
+        let result = null;
+
+        if (name) {
+          this.myDevelopers.map((item, index) => {
+            if (item === name) {
+              result = {item, index};
+            }
+          });
+        }
+
+        return result;
+      }
+
+    }
+
+    let manager1 = {
+      name : 'manager1',
+      age : '10',
+      dateOfBirth : '10.01.2018',
+      salary : '100',
+      department : 'Отдел1',
+    };
+
+    let manager2 = {
+      name : 'manager2',
+      age : '20',
+      dateOfBirth : '10.02.2018',
+      salary : '200',
+      department : 'Отдел2',
+    };
+
+    let Manager1 = new Manager(manager1);
+    let Manager2 = new Manager(manager2);
+
+    let devel1 = {
+      name : 'devel1',
+      age : '30',
+      dateOfBirth : '10.03.2018',
+      salary : '300',
+      department : 'Отдел3',
+      myManager: Manager1
+    };
+
+    let devel2 = {
+      name : 'devel2',
+      age : '40',
+      dateOfBirth : '10.04.2018',
+      salary : '400',
+      department : 'Отдел4',
+      myManager: Manager2
+    };
+
+    let Devel1 = new Developer(devel1);
+    let Devel2 = new Developer(devel2);
+
+
+    console.log(Manager1);
+    console.log(Manager2);
+
+    console.log(Devel1);
+    console.log(Devel2);
+
+    console.log(Manager1.getDevelopers());
+    console.log(Manager2.getDevelopers());
+
+    console.log(Devel1.getMyManager(), 'Devel1');
+    console.log(Devel2.getMyManager(), 'Devel2');
+
+    Manager1.setDeveloper(Devel1);
+    Manager2.setDeveloper(Devel2);
+
+    Devel1.replaceManager(Manager2);
+    Devel2.replaceManager(Manager1);
+
+    console.log(Manager1.getDevelopers());
+    console.log(Manager2.getDevelopers());
+
+
+    console.log(Devel1.getMyManager(), 'Devel1');
+    console.log(Devel2.getMyManager(), 'Devel2');
+
+  </script>
+</head>
+<body>
+
+</body>
+</html>
