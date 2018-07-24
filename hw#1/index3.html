@@ -172,31 +172,47 @@
     let Devel1 = new Developer(devel1);
     let Devel2 = new Developer(devel2);
 
-
+    console.log('// ------ менеджеры -----//');
     console.log(Manager1);
     console.log(Manager2);
+    console.log('// ------ менеджеры -----//');
+    
 
+    console.log('// ------ разработчики -----//');    
     console.log(Devel1);
     console.log(Devel2);
+    console.log('// ------ разработчики -----//');
 
+
+    console.log('// ------ разработчики менеджеров 1 - 2 -----//');
     console.log(Manager1.getDevelopers());
     console.log(Manager2.getDevelopers());
+    console.log('// ------ разработчики менеджеров 1 - 2 -----//');
 
+
+    Manager1.setDeveloper(Devel2);
+    Manager2.setDeveloper(Devel1);
+
+
+	console.log('// ------ разработчики менеджеров 1 - 2 -----//');
+    console.log(Manager1.getDevelopers());
+    console.log(Manager2.getDevelopers());
+	console.log('// ------ разработчики менеджеров 1 - 2 -----//');
+
+
+    console.log('// ------ менеджеры -----//');
     console.log(Devel1.getMyManager(), 'Devel1');
     console.log(Devel2.getMyManager(), 'Devel2');
-
-    Manager1.setDeveloper(Devel1);
-    Manager2.setDeveloper(Devel2);
+    console.log('// ------ менеджеры -----//');
+    
 
     Devel1.replaceManager(Manager2);
     Devel2.replaceManager(Manager1);
 
-    console.log(Manager1.getDevelopers());
-    console.log(Manager2.getDevelopers());
-
-
+    console.log('// ------ менеджера после смены -----//');
     console.log(Devel1.getMyManager(), 'Devel1');
     console.log(Devel2.getMyManager(), 'Devel2');
+    console.log('// ------ менеджера после смены -----//');
 
   </script>
 </head>
