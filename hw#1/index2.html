@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Function calculateArea</title>
+
+  <script>
+
+    function calculateArea (figure, input ) {
+
+      let area = null;
+
+      switch (figure) {
+
+        case 'trigon':
+
+          let {height, basis} = input;
+          area = height * basis / 2;
+
+          break;
+        case 'circle':
+
+          let {diametr} = input;
+          area  = Math.PI * Math.pow(diametr, 2) / 4;
+
+          break;
+      }
+
+      return {
+        area: area,
+        figure,
+        input,
+      };
+    }
+
+    console.log(calculateArea('circle', {diametr: 32}));
+    console.log(calculateArea('trigon', {height: 100, basis: 12}));
+  </script>
+</head>
+<body>
+
+</body>
+</html>
