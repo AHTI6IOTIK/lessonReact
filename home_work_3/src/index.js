@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ReactDom from 'react-dom';
-import NewsList from './NewsList'
+import ProductList from './screens/ProductList';
 import newsItems from './news';
 
-ReactDom.render(<NewsList data={newsItems} />, document.getElementById('root'));
+ReactDom.render(<ProductList />, document.getElementById('root'));
