@@ -9,13 +9,15 @@ module.exports = {
     entry: [ 'babel-polyfill', path.resolve(ENTRY_PATH, 'index.js') ],
     output: {
         path: OUTPUT_PATH,
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        publicPath: '/'
     },
     devServer: {
         port: 3030,
         contentBase: OUTPUT_PATH,
         compress: true,
-        open: true
+        open: true,
+        historyApiFallback: true
     },
     plugins: [
         new HtmlWebpackPlugin({
